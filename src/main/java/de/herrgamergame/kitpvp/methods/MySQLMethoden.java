@@ -23,9 +23,9 @@ public class MySQLMethoden {
         PreparedStatement ps;
 
         if(userExists(uuid)){
-            //TODO UPDATA
+
             try {
-                ps = MySQL.getCon().prepareStatement("UPDATE Stats SET Kills = ? AND Deats = ? WHERE UUID = ? ");
+                ps = MySQL.getCon().prepareStatement("UPDATE Stats SET Kills = ? , Deaths = ? WHERE UUID = ? ");
                 ps.setInt(1,kills);
                 ps.setInt(2,deaths);
                 ps.setString(3,uuid.toString());
@@ -34,10 +34,10 @@ public class MySQLMethoden {
                 e.printStackTrace();
             }
         }else{
-            //TODO Insert
+
 
             try {
-                ps = MySQL.getCon().prepareStatement("INSERT INTO Stats(UUID, Spielername, Kills, Deaths) VALUES(?,?,?,?");
+                ps = MySQL.getCon().prepareStatement("INSERT INTO Stats(UUID, Spielername, Kills, Deaths) VALUES(?,?,?,?)");
                 ps.setString(1,uuid.toString());
                 ps.setString(2,name);
                 ps.setInt(3,kills);
@@ -69,7 +69,7 @@ public class MySQLMethoden {
         PreparedStatement ps;
 
         try {
-            ps = MySQL.getCon().prepareStatement("SLECET Deaths FROM Stats WHERE UUID = ?");
+            ps = MySQL.getCon().prepareStatement("SELECT Deaths FROM Stats WHERE UUID = ?");
             ps.setString(1,uuid.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
